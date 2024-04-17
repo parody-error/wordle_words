@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { LetterState } from "./LetterState";
 
-export function Tile() {
+export function Tile({ letter }) {
   const [state, setState] = useState(LetterState.absent);
-  const [letter, setLetter] = useState("H");
 
   return (
     <div
