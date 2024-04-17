@@ -145,45 +145,11 @@ video {
   font-family: inherit;
 
   vertical-align: baseline;
+
+  background-color: #000;
 }
 
 .dark {
-  --spelling-bee: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/SpellingBee-Icon-Normalized-Color.svg");
-
-  --daily: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/Crossword-Icon-Normalized-Color.svg");
-
-  --mini: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/Mini-Icon-Normalized-Color.svg");
-
-  --tiles: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/Tiles-Icon-Normalized-Color.svg");
-
-  --sudoku: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/Sudoku-Icon-Normalized-Color.svg");
-
-  --vertex: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/Vertex-Icon-Normalized-Color.svg");
-
-  --letter-boxed: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/LetterBoxed-Icon-Normalized-Color.svg");
-
-  --strands: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/Strands-Icon-Normalized-Color.svg");
-
-  --connections: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/Connections-Icon-Dark-Mode.svg");
-
-  --nyt: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/NYT-Icon-Normalized-Color.svg");
-
-  --athletic: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/Athletic-Icon-Normalized-Color.svg");
-
-  --stats-auth: url("https://www.nytimes.com/games-assets/v2/assets/wordle/page-icons/stats-auth-cta.svg");
-
-  --wordlebot: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/WordleBot-Icon-Normalized-Color.svg");
-
-  --wordlebot-walking-icon: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/WordleBot-Walking-Icon-Color.svg");
-
-  --stats-problem: url("https://www.nytimes.com/games-assets/v2/assets/wordle/page-icons/transparent-wordle-issue.svg");
-
-  --link-info: url("https://www.nytimes.com/games-assets/v2/assets/wordle/page-icons/dark-mode-wordle-link.svg");
-
-  --gameslogo: url("https://www.nytimes.com/games-assets/v2/assets/wordle/page-icons/whitegameslogo.svg");
-
-  --california-privacy-icon: url("https://www.nytimes.com/games-assets/v2/assets/wordle/nav-icons/california-privacy-dark.svg");
-
   --promo-icon-height: 27px;
 
   --promo-icon-width: 27px;
@@ -198,7 +164,7 @@ video {
 
   --color-correct: var(--green-4);
 
-  --color-absent: var(--color-tone-4);
+  --color-absent: var(--color-tone-1);
 
   --tile-text-color: var(--color-tone-1);
 
@@ -604,4 +570,9 @@ body {
   --inter-ad-top-bar-height: 34px;
 
   --inter-ad-bottom-bar-height: 24px;
+}
+
+.tile-row-container {
+  display: flex;
+  flex-direction: row;
 }
