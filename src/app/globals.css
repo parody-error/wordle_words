@@ -46,6 +46,10 @@
   -moz-user-select: none;
 
   user-select: none;
+
+  width: 62px;
+
+  height: 62.5px;
 }
 
 html,
