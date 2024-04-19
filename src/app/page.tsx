@@ -13,7 +13,7 @@ const wordle = "TITHE";
 export default function Home() {
   const [guessedWordCount, setGuessedWordCount] = useState(0);
   const [guessedWords, setGuessedWords] = useState(
-    Array<string>(Constants.MAX_WORD_LENGTH).fill("     ")
+    Array<string>(Constants.MAX_GUESS_COUNT).fill(Constants.EMPTY_WORD)
   );
 
   function onGuessWord(guessedWord: string) {
