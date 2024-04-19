@@ -11,21 +11,34 @@ import * as Constants from "../constants/constants";
 const wordle = "TITHE";
 
 export default function Home() {
-  const [wordleWords, setWordleWords] = useState(new Set());
+  const [wordleAnswers, setWordleAnswers] = useState(new Set());
+  const [wordleGuesses, setWordleGuesses] = useState(new Set());
   const [guessedWordCount, setGuessedWordCount] = useState(0);
   const [guessedWords, setGuessedWords] = useState(
     Array<string>(Constants.MAX_GUESS_COUNT).fill(Constants.EMPTY_WORD)
   );
 
   useEffect(() => {
-    fetch(Constants.WORDLE_WORDS)
+    fetch(Constants.WORDLE_GUESSES)
       .then((result) => result.text())
       .then((text) => {
-        setWordleWords(new Set(text.split(/[\r\n]+/)));
+        setWordleGuesses(new Set(text.split(/[\r\n]+/)));
       })
       .catch((error) => {
         console.log("Error loading words:", error);
-        setWordleWords(new Set());
+        setWordleGuesses(new Set());
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(Constants.WORDLE_ANSWERS)
+      .then((result) => result.text())
+      .then((text) => {
+        setWordleAnswers(new Set(text.split(/[\r\n]+/)));
+      })
+      .catch((error) => {
+        console.log("Error loading words:", error);
+        setWordleAnswers(new Set());
       });
   }, []);
 
@@ -57,7 +70,7 @@ export default function Home() {
       }
     }
 
-    return wordleWords.has(word);
+    return wordleAnswers.has(word) || wordleGuesses.has(word);
   }
 
   return (
