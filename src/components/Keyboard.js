@@ -5,7 +5,7 @@ export function Keyboard({ onGuessWord }) {
   const [currentGuess, setCurrentGuess] = useState("");
 
   function onInputChanged(e) {
-    let nextGuess = e.target.value;
+    let nextGuess = e.target.value.toUpperCase();
     if (nextGuess.length === Constants.MAX_WORD_LENGTH) {
       onGuessWord(nextGuess);
       nextGuess = "";

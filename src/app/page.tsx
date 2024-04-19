@@ -24,22 +24,23 @@ export default function Home() {
         setWordleWords(new Set(text.split(/[\r\n]+/)));
       })
       .catch((error) => {
+        console.log("Error loading words:", error);
         setWordleWords(new Set());
       });
   }, []);
 
-  function onGuessWord(guessedWord: string) {
+  function onGuessWord(word: string) {
     if (guessedWordCount === Constants.MAX_GUESS_COUNT) {
       return;
     }
 
-    if (!isValidWord(guessedWord)) {
+    if (!isValidWord(word)) {
       return;
     }
 
     const nextGuessedWords = guessedWords.map((existingWord, i) => {
       if (i === guessedWordCount) {
-        return guessedWord.toUpperCase();
+        return word;
       } else {
         return existingWord;
       }
@@ -49,8 +50,14 @@ export default function Home() {
     setGuessedWordCount(guessedWordCount + 1);
   }
 
-  function isValidWord(guessedWord: string) {
-    return wordleWords.has(guessedWord.toUpperCase());
+  function isValidWord(word: string) {
+    for (let guessedWord of guessedWords) {
+      if (guessedWord === word) {
+        return false;
+      }
+    }
+
+    return wordleWords.has(word);
   }
 
   return (
