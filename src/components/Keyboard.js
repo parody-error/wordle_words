@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const MAX_WORD_LENGTH = 5;
 
-export function Keyboard({ onGuessWord, onKeyPress }) {
+export function Keyboard({ onGuessWord }) {
   const [currentGuess, setCurrentGuess] = useState("");
 
   function onInputChanged(e) {
@@ -14,8 +14,6 @@ export function Keyboard({ onGuessWord, onKeyPress }) {
     }
 
     setCurrentGuess(nextGuess);
-
-    onKeyPress(event.target.value.slice(-1));
   }
 
   return (
