@@ -19,28 +19,37 @@ export default function Home() {
   );
 
   useEffect(() => {
-    fetch(Constants.WORDLE_GUESSES)
-      .then((result) => result.text())
-      .then((text) => {
-        setWordleGuesses(new Set(text.split(/[\r\n]+/)));
+    fetchWords(Constants.WORDLE_GUESSES)
+      .then((words: Set<string>) => {
+        setWordleGuesses(words);
       })
       .catch((error) => {
-        console.log("Error loading words:", error);
-        setWordleGuesses(new Set());
+        console.error("Error fetching guesses:", error);
       });
   }, []);
 
   useEffect(() => {
-    fetch(Constants.WORDLE_ANSWERS)
-      .then((result) => result.text())
-      .then((text) => {
-        setWordleAnswers(new Set(text.split(/[\r\n]+/)));
+    fetchWords(Constants.WORDLE_ANSWERS)
+      .then((words: Set<string>) => {
+        setWordleAnswers(words);
       })
       .catch((error) => {
-        console.log("Error loading words:", error);
-        setWordleAnswers(new Set());
+        console.error("Error fetching answers:", error);
       });
   }, []);
+
+  function fetchWords(file: string) {
+    return new Promise<Set<string>>((resolve, reject) => {
+      fetch(file)
+        .then((result) => result.text())
+        .then((text) => {
+          resolve(new Set(text.split(/[\r\n]+/)));
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
 
   function onGuessWord(word: string) {
     if (guessedWordCount === Constants.MAX_GUESS_COUNT) {
