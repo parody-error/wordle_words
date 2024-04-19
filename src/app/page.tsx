@@ -6,18 +6,18 @@ import { useState } from "react";
 
 import { Keyboard } from "../components/Keyboard";
 import { TileRowGrid } from "../components/TileRowGrid";
+import * as Constants from "../constants/constants";
 
-const MAX_GUESS_COUNT = 5;
-const wordle = "STARE";
+const wordle = "TITHE";
 
 export default function Home() {
   const [guessedWordCount, setGuessedWordCount] = useState(0);
   const [guessedWords, setGuessedWords] = useState(
-    Array<string>(5).fill("     ")
+    Array<string>(Constants.MAX_WORD_LENGTH).fill("     ")
   );
 
   function onGuessWord(guessedWord: string) {
-    if (guessedWordCount === MAX_GUESS_COUNT) {
+    if (guessedWordCount === Constants.MAX_GUESS_COUNT) {
       return;
     }
 

@@ -1,13 +1,12 @@
 import { useState } from "react";
-
-const MAX_WORD_LENGTH = 5;
+import * as Constants from "../constants/constants";
 
 export function Keyboard({ onGuessWord }) {
   const [currentGuess, setCurrentGuess] = useState("");
 
   function onInputChanged(e) {
     let nextGuess = e.target.value;
-    if (nextGuess.length === MAX_WORD_LENGTH) {
+    if (nextGuess.length === Constants.MAX_WORD_LENGTH) {
       onGuessWord(nextGuess);
       nextGuess = "";
       e.target.value = "";

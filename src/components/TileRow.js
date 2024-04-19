@@ -1,9 +1,10 @@
 import { Tile } from "./Tile";
 import { LetterState } from "./LetterState.ts";
+import * as Constants from "../constants/constants";
 
 export function TileRow({ word, wordle }) {
   function getState() {
-    let state = Array(5).fill(LetterState.absent);
+    let state = Array(Constants.MAX_WORD_LENGTH).fill(LetterState.absent);
     if (word[0] === " ") {
       return state;
     }
