@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 
 import { Keyboard } from "../components/Keyboard";
+import { RemainingWords } from "../components/RemainingWords";
 import { TileRowGrid } from "../components/TileRowGrid";
 import * as Constants from "../constants/constants";
 
@@ -37,6 +38,9 @@ export default function Home() {
         console.error("Error fetching answers:", error);
       });
   }, []);
+
+  let lastGuessedWord =
+    guessedWordCount > 0 ? guessedWords[guessedWordCount - 1] : "";
 
   function fetchWords(file: string) {
     return new Promise<Set<string>>((resolve, reject) => {
@@ -86,6 +90,10 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <TileRowGrid words={guessedWords} wordle={wordle} />
+        <div>
+          <RemainingWords word={lastGuessedWord} answers={wordleAnswers} />
+          <RemainingWords word={lastGuessedWord} answers={wordleGuesses} />
+        </div>
         <Keyboard onGuessWord={onGuessWord} />
       </div>
     </main>

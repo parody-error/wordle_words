@@ -580,3 +580,7 @@ body {
   display: flex;
   flex-direction: row;
 }
+
+.remaining-words {
+  color: #d0021b;
+}
