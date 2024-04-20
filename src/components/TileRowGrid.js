@@ -1,10 +1,10 @@
 import { TileRow } from "./TileRow";
 
-export function TileRowGrid({ words, wordle }) {
+export function TileRowGrid({ guessedWords, wordle }) {
   return (
     <div>
-      {words.map((w, i) => (
-        <TileRow key={i} word={w} wordle={wordle}></TileRow>
+      {guessedWords.map((w, i) => (
+        <TileRow key={i} guessedWord={w} wordle={wordle}></TileRow>
       ))}
     </div>
   );

@@ -2,16 +2,16 @@ import { Tile } from "./Tile";
 import { LetterState } from "./LetterState.ts";
 import * as Constants from "../constants/constants";
 
-export function TileRow({ word, wordle }) {
+export function TileRow({ guessedWord, wordle }) {
   function getState() {
     let state = Array(Constants.MAX_WORD_LENGTH).fill(LetterState.absent);
-    if (word[0] === " ") {
+    if (guessedWord[0] === " ") {
       return state;
     }
 
-    let letters = new Set(word.split(""));
+    let letters = new Set(guessedWord.split(""));
     letters.forEach((letter) => {
-      let wordIndices = getIndices(letter, word);
+      let wordIndices = getIndices(letter, guessedWord);
       let wordleIndices = getIndices(letter, wordle);
 
       wordIndices.forEach((index) => {
@@ -59,7 +59,7 @@ export function TileRow({ word, wordle }) {
 
   return (
     <div className="tile-row-container">
-      {word.split("").map((l, i) => (
+      {guessedWord.split("").map((l, i) => (
         <Tile key={i} letter={l} state={state[i]} />
       ))}
     </div>

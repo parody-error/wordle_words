@@ -89,7 +89,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <TileRowGrid words={guessedWords} wordle={wordle} />
+        <TileRowGrid guessedWords={guessedWords} wordle={wordle} />
         <div>
           <RemainingWords word={lastGuessedWord} answers={wordleAnswers} />
           <RemainingWords word={lastGuessedWord} answers={wordleGuesses} />
