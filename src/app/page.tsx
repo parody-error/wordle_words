@@ -40,9 +40,6 @@ export default function Home() {
       });
   }, []);
 
-  let lastGuessedWord =
-    guessedWordCount > 0 ? guessedWords[guessedWordCount - 1] : "";
-
   function fetchWords(file: string) {
     return new Promise<Set<string>>((resolve, reject) => {
       fetch(file)
@@ -87,13 +84,24 @@ export default function Home() {
     return wordleAnswers.has(word) || wordleGuesses.has(word);
   }
 
+  let lastGuessedWord =
+    guessedWordCount > 0 ? guessedWords[guessedWordCount - 1] : "";
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
         <TileRowGrid guessedWords={guessedWords} wordle={wordle} />
         <div>
-          <RemainingWords word={lastGuessedWord} answers={wordleAnswers} />
-          <RemainingWords word={lastGuessedWord} answers={wordleGuesses} />
+          <RemainingWords
+            guessedWord={lastGuessedWord}
+            wordle={wordle}
+            candidateWords={wordleAnswers}
+          />
+          <RemainingWords
+            guessedWord={lastGuessedWord}
+            wordle={wordle}
+            candidateWords={wordleGuesses}
+          />
         </div>
         <Keyboard onGuessWord={onGuessWord} />
       </div>
