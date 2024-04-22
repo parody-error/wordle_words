@@ -93,12 +93,12 @@ export default function Home() {
         <TileRowGrid guessedWords={guessedWords} wordle={wordle} />
         <div>
           <RemainingWords
-            guessedWord={lastGuessedWord}
+            guessedWords={guessedWords}
             wordle={wordle}
             candidateWords={wordleAnswers}
           />
           <RemainingWords
-            guessedWord={lastGuessedWord}
+            guessedWords={guessedWords}
             wordle={wordle}
             candidateWords={wordleGuesses}
           />

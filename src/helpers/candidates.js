@@ -1,4 +1,3 @@
-import { isCompositeComponent } from "react-dom/test-utils";
 import { LetterState } from "../components/LetterState";
 import { getState } from "../helpers/state";
 
@@ -26,8 +25,8 @@ export function getCandidateWords(guessedWord, wordle, candidates) {
       let letter = guessedWord[presentIndices[i]];
 
       if (
-        getCount1(guessedWord, state, letter) >
-        getCount1(candidateWord, state, letter)
+        countPresent(guessedWord, state, letter) >
+        countPresent(candidateWord, state, letter)
       ) {
         return false;
       }
@@ -40,7 +39,7 @@ export function getCandidateWords(guessedWord, wordle, candidates) {
     for (let i = 0; i < absentIndices.length; ++i) {
       let letter = guessedWord[absentIndices[i]];
 
-      if (getCount2(candidateWord, state, letter) > 0) {
+      if (countAbsent(candidateWord, state, letter) > 0) {
         return false;
       }
     }
@@ -60,7 +59,7 @@ function getIndices(state, letterState) {
   }, []);
 }
 
-function getCount1(guessedWord, state, letter) {
+function countPresent(guessedWord, state, letter) {
   let count = 0;
 
   for (let i = 0; i < guessedWord.length; ++i) {
@@ -72,7 +71,7 @@ function getCount1(guessedWord, state, letter) {
   return count;
 }
 
-function getCount2(guessedWord, state, letter) {
+function countAbsent(guessedWord, state, letter) {
   let count = 0;
 
   for (let i = 0; i < guessedWord.length; ++i) {
