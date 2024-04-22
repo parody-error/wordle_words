@@ -16,6 +16,14 @@
   color: var(--key-evaluated-text-color-correct);
 }
 
+.Tile-module_tile__UWEHN[data-state="unknown"] {
+  background-color: var(--color-unknown);
+
+  color: var(--key-evaluated-text-color-absent);
+
+  border: 1px solid darkgrey;
+}
+
 .Tile-module_tile__UWEHN {
   font-family: "nyt-franklin";
 
@@ -50,6 +58,8 @@
   width: 62px;
 
   height: 62.5px;
+
+  margin: 2px;
 }
 
 html,
@@ -169,6 +179,8 @@ video {
   --color-correct: var(--green-4);
 
   --color-absent: var(--color-tone-1);
+
+  --color-unknown: var(--black);
 
   --tile-text-color: var(--color-tone-1);
 

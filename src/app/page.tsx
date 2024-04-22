@@ -84,9 +84,6 @@ export default function Home() {
     return wordleAnswers.has(word) || wordleGuesses.has(word);
   }
 
-  let lastGuessedWord =
-    guessedWordCount > 0 ? guessedWords[guessedWordCount - 1] : "";
-
   return (
     <main className={styles.main}>
       <div className={styles.description}>

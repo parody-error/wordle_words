@@ -2,7 +2,7 @@ import * as Constants from "../constants/constants";
 import { LetterState } from "../components/LetterState";
 
 export function getState(guessedWord, wordle) {
-  let state = Array(Constants.MAX_WORD_LENGTH).fill(LetterState.absent);
+  let state = Array(Constants.MAX_WORD_LENGTH).fill(LetterState.unknown);
   if (guessedWord[0] === " ") {
     return state;
   }
