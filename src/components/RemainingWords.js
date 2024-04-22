@@ -1,7 +1,15 @@
+import { useState } from "react";
 import { getCandidateWords } from "../helpers/candidates";
 import * as Constants from "../constants/constants";
 
-export function RemainingWords({ guessedWords, wordle, candidateWords }) {
+export function RemainingWords({
+  title,
+  guessedWords,
+  wordle,
+  candidateWords,
+}) {
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
   let words = [...candidateWords];
 
   for (let i = guessedWords.length - 1; i >= 0; --i) {
@@ -10,9 +18,25 @@ export function RemainingWords({ guessedWords, wordle, candidateWords }) {
     }
   }
 
+  function onExpandCollapse() {
+    if (!isCollapsed || words.length <= Constants.MAX_WORDS_DISPLAYED) {
+      setIsCollapsed((c) => !c);
+    }
+  }
+
   return (
     <div>
-      <b className="remaining-words">Remaining Words</b>
+      <button
+        type="button"
+        className="collapsible"
+        onClick={onExpandCollapse}
+      >{`${title}: ${words.length}`}</button>
+      {!isCollapsed &&
+        words.map((w) => (
+          <p key={w} className="candidates">
+            {w}
+          </p>
+        ))}
     </div>
   );
 }

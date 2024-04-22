@@ -88,16 +88,18 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <TileRowGrid guessedWords={guessedWords} wordle={wordle} />
-        <div>
+        <div className="remaining-words">
           <RemainingWords
-            guessedWords={guessedWords}
-            wordle={wordle}
-            candidateWords={wordleAnswers}
-          />
-          <RemainingWords
+            title="Possible Guesses"
             guessedWords={guessedWords}
             wordle={wordle}
             candidateWords={wordleGuesses}
+          />
+          <RemainingWords
+            title="Possible Answers"
+            guessedWords={guessedWords}
+            wordle={wordle}
+            candidateWords={wordleAnswers}
           />
         </div>
         <Keyboard onGuessWord={onGuessWord} />
