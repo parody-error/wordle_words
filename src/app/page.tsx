@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 import { Keyboard } from "../components/Keyboard";
 import { RemainingWords } from "../components/RemainingWords";
 import { TileRowGrid } from "../components/TileRowGrid";
+import { WordleAnswer } from "../components/WordleAnswer";
 
 import * as Constants from "../constants/constants";
 
-const wordle = "TITHE";
-
 export default function Home() {
+  const [wordleAnswer, setWordleAnswer] = useState(
+    Constants.DEFAULT_WORDLE_WORD
+  );
   const [wordleAnswers, setWordleAnswers] = useState(new Set());
   const [wordleGuesses, setWordleGuesses] = useState(new Set());
   const [guessedWordCount, setGuessedWordCount] = useState(0);
@@ -53,6 +55,10 @@ export default function Home() {
     });
   }
 
+  function onUpdateWordleAnswer(word: string) {
+    setWordleAnswer(word);
+  }
+
   function onGuessWord(word: string) {
     if (guessedWordCount === Constants.MAX_GUESS_COUNT) {
       return;
@@ -89,20 +95,23 @@ export default function Home() {
       <div className={styles.description}>
         <div className="row">
           <div className="column">
-            <TileRowGrid guessedWords={guessedWords} wordle={wordle} />
+            <TileRowGrid guessedWords={guessedWords} wordle={wordleAnswer} />
           </div>
           <div className="column">
+            <div>
+              <WordleAnswer onUpdateWordleAnswer={onUpdateWordleAnswer} />
+            </div>
             <div className="remaining-words">
               <RemainingWords
                 title="Possible Guesses"
                 guessedWords={guessedWords}
-                wordle={wordle}
+                wordle={wordleAnswer}
                 candidateWords={wordleGuesses}
               />
               <RemainingWords
                 title="Possible Answers"
                 guessedWords={guessedWords}
-                wordle={wordle}
+                wordle={wordleAnswer}
                 candidateWords={wordleAnswers}
               />
             </div>
