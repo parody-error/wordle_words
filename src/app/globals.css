@@ -1,3 +1,135 @@
+.Key-module_special__UWEHN[data-state="absent"] {
+  background-color: var(--color-absent);
+
+  color: var(--key-evaluated-text-color-absent);
+}
+
+.Key-module_special__UWEHN[data-state="present"] {
+  background-color: var(--color-present);
+
+  color: var(--key-evaluated-text-color-present);
+}
+
+.Key-module_special__UWEHN[data-state="correct"] {
+  background-color: var(--color-correct);
+
+  color: var(--key-evaluated-text-color-correct);
+}
+
+.Key-module_special__UWEHN[data-state="unknown"] {
+  background-color: grey;
+
+  color: var(--key-evaluated-text-color-absent);
+
+  border: 1px solid darkgrey;
+}
+
+.Key-module_special__UWEHN {
+  font-family: "nyt-franklin";
+
+  width: 100%;
+
+  display: inline-flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 1rem;
+
+  line-height: 1;
+
+  font-weight: bold;
+
+  vertical-align: middle;
+
+  box-sizing: border-box;
+
+  color: var(--tile-text-color);
+
+  text-transform: uppercase;
+
+  -webkit-user-select: none;
+
+  -moz-user-select: none;
+
+  user-select: none;
+
+  width: 65.4px;
+
+  height: 58px;
+
+  margin: 2px;
+
+  border-radius: 4px;
+}
+
+.Key-module_letter__UWEHN[data-state="absent"] {
+  background-color: var(--color-absent);
+
+  color: var(--key-evaluated-text-color-absent);
+}
+
+.Key-module_letter__UWEHN[data-state="present"] {
+  background-color: var(--color-present);
+
+  color: var(--key-evaluated-text-color-present);
+}
+
+.Key-module_letter__UWEHN[data-state="correct"] {
+  background-color: var(--color-correct);
+
+  color: var(--key-evaluated-text-color-correct);
+}
+
+.Key-module_letter__UWEHN[data-state="unknown"] {
+  background-color: var(--color-unknown);
+
+  color: var(--key-evaluated-text-color-absent);
+
+  border: 1px solid darkgrey;
+}
+
+.Key-module_letter__UWEHN {
+  font-family: "nyt-franklin";
+
+  width: 100%;
+
+  display: inline-flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 2rem;
+
+  line-height: 1;
+
+  font-weight: bold;
+
+  vertical-align: middle;
+
+  box-sizing: border-box;
+
+  color: var(--tile-text-color);
+
+  text-transform: uppercase;
+
+  -webkit-user-select: none;
+
+  -moz-user-select: none;
+
+  user-select: none;
+
+  width: 43.6px;
+
+  height: 58px;
+
+  margin: 2px;
+
+  border-radius: 4px;
+}
+
 .Tile-module_tile__UWEHN[data-state="absent"] {
   background-color: var(--color-absent);
 
@@ -626,4 +758,15 @@ body {
 .remaining-words {
   display: flex;
   flex-direction: row;
+}
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

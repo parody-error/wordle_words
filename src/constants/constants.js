@@ -2,6 +2,8 @@ export const MAX_GUESS_COUNT = 6;
 export const MAX_WORD_LENGTH = 5;
 export const EMPTY_WORD = "     ";
 export const MAX_WORDS_DISPLAYED = 15;
+export const ENTER_KEY = "ENTER";
+export const DELETE_KEY = "DEL";
 
 // The complete list of wordle answers.
 // Obtained from: https://gist.github.com/cfreshman/a7b776506c73284511034e63af1017ee
