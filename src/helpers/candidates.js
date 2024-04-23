@@ -20,19 +20,13 @@ export function getCandidateWords(guessedWord, wordle, candidates) {
     return true;
   });
 
-  words = words.filter((candidateWord) => {
-    for (let i = 0; i < presentIndices.length; ++i) {
-      let letter = guessedWord[presentIndices[i]];
+  presentIndices.forEach((i) => {
+    let letter = guessedWord[i];
+    let letterCount = countPresent1(guessedWord, state, letter);
 
-      if (
-        countPresent(guessedWord, state, letter) >
-        countPresent(candidateWord, state, letter)
-      ) {
-        return false;
-      }
-    }
-
-    return true;
+    words = words.filter((candidateWord) => {
+      return letterCount <= countPresent2(candidateWord, state, letter);
+    });
   });
 
   words = words.filter((candidateWord) => {
@@ -59,7 +53,19 @@ function getIndices(state, letterState) {
   }, []);
 }
 
-function countPresent(guessedWord, state, letter) {
+function countPresent1(guessedWord, state, letter) {
+  let count = 0;
+
+  for (let i = 0; i < guessedWord.length; ++i) {
+    if (state[i] === LetterState.present && guessedWord[i] === letter) {
+      ++count;
+    }
+  }
+
+  return count;
+}
+
+function countPresent2(guessedWord, state, letter) {
   let count = 0;
 
   for (let i = 0; i < guessedWord.length; ++i) {
