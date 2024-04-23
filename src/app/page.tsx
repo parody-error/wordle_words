@@ -87,22 +87,30 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <TileRowGrid guessedWords={guessedWords} wordle={wordle} />
-        <div className="remaining-words">
-          <RemainingWords
-            title="Possible Guesses"
-            guessedWords={guessedWords}
-            wordle={wordle}
-            candidateWords={wordleGuesses}
-          />
-          <RemainingWords
-            title="Possible Answers"
-            guessedWords={guessedWords}
-            wordle={wordle}
-            candidateWords={wordleAnswers}
-          />
+        <div className="row">
+          <div className="column">
+            <TileRowGrid guessedWords={guessedWords} wordle={wordle} />
+          </div>
+          <div className="column">
+            <div className="remaining-words">
+              <RemainingWords
+                title="Possible Guesses"
+                guessedWords={guessedWords}
+                wordle={wordle}
+                candidateWords={wordleGuesses}
+              />
+              <RemainingWords
+                title="Possible Answers"
+                guessedWords={guessedWords}
+                wordle={wordle}
+                candidateWords={wordleAnswers}
+              />
+            </div>
+          </div>
+          <div className="row"></div>
+          <hr />
+          <Keyboard onGuessWord={onGuessWord} />
         </div>
-        <Keyboard onGuessWord={onGuessWord} />
       </div>
     </main>
   );
