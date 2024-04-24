@@ -5,9 +5,12 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 
 import { Keyboard } from "../components/Keyboard";
+import { LetterState } from "../components/LetterState";
 import { RemainingWords } from "../components/RemainingWords";
 import { TileRowGrid } from "../components/TileRowGrid";
 import { WordleAnswer } from "../components/WordleAnswer";
+
+import { getState } from "../helpers/state";
 
 import * as Constants from "../constants/constants";
 
@@ -21,6 +24,38 @@ export default function Home() {
   const [guessedWordCount, setGuessedWordCount] = useState(0);
   const [guessedWords, setGuessedWords] = useState(
     Array<string>(Constants.MAX_GUESS_COUNT).fill(Constants.EMPTY_WORD)
+  );
+  const [letterStates, setLetterStates] = useState(
+    new Map([
+      ["A", LetterState.unknown],
+      ["B", LetterState.unknown],
+      ["C", LetterState.unknown],
+      ["D", LetterState.unknown],
+      ["E", LetterState.unknown],
+      ["F", LetterState.unknown],
+      ["G", LetterState.unknown],
+      ["H", LetterState.unknown],
+      ["I", LetterState.unknown],
+      ["J", LetterState.unknown],
+      ["K", LetterState.unknown],
+      ["L", LetterState.unknown],
+      ["M", LetterState.unknown],
+      ["N", LetterState.unknown],
+      ["O", LetterState.unknown],
+      ["P", LetterState.unknown],
+      ["Q", LetterState.unknown],
+      ["R", LetterState.unknown],
+      ["S", LetterState.unknown],
+      ["T", LetterState.unknown],
+      ["U", LetterState.unknown],
+      ["V", LetterState.unknown],
+      ["W", LetterState.unknown],
+      ["X", LetterState.unknown],
+      ["Y", LetterState.unknown],
+      ["Z", LetterState.unknown],
+      [Constants.ENTER_KEY, LetterState.unknown],
+      [Constants.DELETE_KEY, LetterState.unknown],
+    ])
   );
 
   useEffect(() => {
@@ -92,6 +127,24 @@ export default function Home() {
     setGuessedWords(nextGuessedWords);
     setGuessedWordCount(guessedWordCount + 1);
     setCurrentGuess("");
+
+    updateLetterStates(nextGuessedWords);
+  }
+
+  function updateLetterStates(words: Array<string>) {
+    let nextLetterStates = letterStates;
+
+    words.forEach((word) => {
+      const state = getState(word, wordleAnswer);
+      state.forEach((s, i) => {
+        const currentState = nextLetterStates.get(word[i]);
+        if (currentState !== LetterState.correct) {
+          nextLetterStates.set(word[i], s);
+        }
+      });
+    });
+
+    setLetterStates(nextLetterStates);
   }
 
   function isValidWord(word: string) {
@@ -136,7 +189,7 @@ export default function Home() {
           </div>
           <div className="row"></div>
           <hr />
-          <Keyboard currentGuess={currentGuess} onInput={onKeyboardInput} />
+          <Keyboard letterStates={letterStates} onInput={onKeyboardInput} />
         </div>
       </div>
     </main>

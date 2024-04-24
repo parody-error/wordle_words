@@ -65,7 +65,7 @@
 }
 
 .Key-module_letter__UWEHN[data-state="absent"] {
-  background-color: var(--color-absent);
+  background-color: #303030;
 
   color: var(--key-evaluated-text-color-absent);
 }
@@ -83,7 +83,7 @@
 }
 
 .Key-module_letter__UWEHN[data-state="unknown"] {
-  background-color: var(--color-unknown);
+  background-color: grey;
 
   color: var(--key-evaluated-text-color-absent);
 
@@ -131,7 +131,7 @@
 }
 
 .Tile-module_tile__UWEHN[data-state="absent"] {
-  background-color: var(--color-absent);
+  background-color: #303030;
 
   color: var(--key-evaluated-text-color-absent);
 }

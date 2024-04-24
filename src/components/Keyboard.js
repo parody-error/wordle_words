@@ -4,30 +4,30 @@ import { KeyboardKey } from "./KeyboardKey";
 import { KeyStyle } from "../constants/KeyStyle";
 import { LetterState } from "./LetterState";
 
-export function Keyboard({ currentGuess, onInput }) {
+export function Keyboard({ letterStates, onInput }) {
   let firstRowKeys = Array(
-    { value: "Q", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "W", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "E", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "R", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "T", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "Y", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "U", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "I", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "O", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "P", style: KeyStyle.LETTER, state: LetterState.unknown }
+    { value: "Q", style: KeyStyle.LETTER },
+    { value: "W", style: KeyStyle.LETTER },
+    { value: "E", style: KeyStyle.LETTER },
+    { value: "R", style: KeyStyle.LETTER },
+    { value: "T", style: KeyStyle.LETTER },
+    { value: "Y", style: KeyStyle.LETTER },
+    { value: "U", style: KeyStyle.LETTER },
+    { value: "I", style: KeyStyle.LETTER },
+    { value: "O", style: KeyStyle.LETTER },
+    { value: "P", style: KeyStyle.LETTER }
   );
 
   let secondRowKeys = Array(
-    { value: "A", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "S", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "D", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "F", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "G", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "H", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "J", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "K", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "L", style: KeyStyle.LETTER, state: LetterState.unknown }
+    { value: "A", style: KeyStyle.LETTER },
+    { value: "S", style: KeyStyle.LETTER },
+    { value: "D", style: KeyStyle.LETTER },
+    { value: "F", style: KeyStyle.LETTER },
+    { value: "G", style: KeyStyle.LETTER },
+    { value: "H", style: KeyStyle.LETTER },
+    { value: "J", style: KeyStyle.LETTER },
+    { value: "K", style: KeyStyle.LETTER },
+    { value: "L", style: KeyStyle.LETTER }
   );
 
   let thirdRowKeys = Array(
@@ -36,13 +36,13 @@ export function Keyboard({ currentGuess, onInput }) {
       style: KeyStyle.SPECIAL,
       state: LetterState.unknown,
     },
-    { value: "Z", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "X", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "C", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "V", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "B", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "N", style: KeyStyle.LETTER, state: LetterState.unknown },
-    { value: "M", style: KeyStyle.LETTER, state: LetterState.unknown },
+    { value: "Z", style: KeyStyle.LETTER },
+    { value: "X", style: KeyStyle.LETTER },
+    { value: "C", style: KeyStyle.LETTER },
+    { value: "V", style: KeyStyle.LETTER },
+    { value: "B", style: KeyStyle.LETTER },
+    { value: "N", style: KeyStyle.LETTER },
+    { value: "M", style: KeyStyle.LETTER },
     {
       value: Constants.DELETE_KEY,
       style: KeyStyle.SPECIAL,
@@ -59,7 +59,7 @@ export function Keyboard({ currentGuess, onInput }) {
               key={k.value}
               value={k.value}
               style={k.style}
-              state={k.state}
+              state={letterStates.get(k.value)}
               onPress={onInput}
             />
           ))}
@@ -69,7 +69,7 @@ export function Keyboard({ currentGuess, onInput }) {
                 key={k.value}
                 value={k.value}
                 style={k.style}
-                state={k.state}
+                state={letterStates.get(k.value)}
                 onPress={onInput}
               />
             ))}
@@ -81,7 +81,7 @@ export function Keyboard({ currentGuess, onInput }) {
               key={k.value}
               value={k.value}
               style={k.style}
-              state={k.state}
+              state={letterStates.get(k.value)}
               onPress={onInput}
             />
           ))}
