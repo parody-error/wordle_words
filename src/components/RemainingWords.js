@@ -24,13 +24,15 @@ export function RemainingWords({
     }
   }
 
+  let wordCount = `${words.length}`.padStart(5, "0");
+
   return (
     <div>
       <button
         type="button"
         className="collapsible"
         onClick={onExpandCollapse}
-      >{`${title}: ${words.length}`}</button>
+      >{`${title}: ${wordCount}`}</button>
       {!isCollapsed &&
         words.map((w) => (
           <p key={w} className="candidates">
