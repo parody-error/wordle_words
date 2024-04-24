@@ -73,7 +73,7 @@ export default function Home() {
   }
 
   function onKeyboardInput(input: string) {
-    if (guessedWords.length === Constants.MAX_GUESS_COUNT) {
+    if (!continueGuessing()) {
       return;
     }
 
@@ -90,6 +90,21 @@ export default function Home() {
         }
       }
     }
+  }
+
+  function continueGuessing() {
+    if (guessedWords.length === Constants.MAX_GUESS_COUNT) {
+      return false;
+    }
+
+    if (guessedWords.length > 0) {
+      let lastGuessedWord = guessedWords[guessedWords.length - 1];
+      if (lastGuessedWord === wordleAnswer) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   function addCurrentGuess() {
