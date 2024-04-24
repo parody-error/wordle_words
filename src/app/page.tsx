@@ -17,6 +17,7 @@ export default function Home() {
   );
   const [wordleAnswers, setWordleAnswers] = useState(new Set());
   const [wordleGuesses, setWordleGuesses] = useState(new Set());
+  const [currentGuess, setCurrentGuess] = useState("");
   const [guessedWordCount, setGuessedWordCount] = useState(0);
   const [guessedWords, setGuessedWords] = useState(
     Array<string>(Constants.MAX_GUESS_COUNT).fill(Constants.EMPTY_WORD)
@@ -59,15 +60,27 @@ export default function Home() {
     setWordleAnswer(word);
   }
 
-  function onGuessWord(word: string) {
+  function onKeyboardInput(input: string) {
     if (guessedWordCount === Constants.MAX_GUESS_COUNT) {
       return;
     }
 
-    if (!isValidWord(word)) {
-      return;
+    if (input === Constants.ENTER_KEY) {
+      if (isValidWord(currentGuess)) {
+        addGuess(currentGuess);
+      }
+    } else if (input === Constants.DELETE_KEY) {
+      if (currentGuess.length > 0) {
+        setCurrentGuess(currentGuess.slice(0, -1));
+      }
+    } else {
+      if (currentGuess.length < Constants.MAX_WORD_LENGTH) {
+        setCurrentGuess(currentGuess + input);
+      }
     }
+  }
 
+  function addGuess(word: string) {
     const nextGuessedWords = guessedWords.map((existingWord, i) => {
       if (i === guessedWordCount) {
         return word;
@@ -78,9 +91,14 @@ export default function Home() {
 
     setGuessedWords(nextGuessedWords);
     setGuessedWordCount(guessedWordCount + 1);
+    setCurrentGuess("");
   }
 
   function isValidWord(word: string) {
+    if (word.length !== Constants.MAX_WORD_LENGTH) {
+      return false;
+    }
+
     for (let guessedWord of guessedWords) {
       if (guessedWord === word) {
         return false;
@@ -118,7 +136,7 @@ export default function Home() {
           </div>
           <div className="row"></div>
           <hr />
-          <Keyboard onGuessWord={onGuessWord} />
+          <Keyboard currentGuess={currentGuess} onInput={onKeyboardInput} />
         </div>
       </div>
     </main>

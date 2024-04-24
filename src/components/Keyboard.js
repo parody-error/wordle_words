@@ -1,30 +1,10 @@
 import * as Constants from "../constants/constants";
 
-import { useState } from "react";
 import { KeyboardKey } from "./KeyboardKey";
 import { KeyStyle } from "../constants/KeyStyle";
 import { LetterState } from "./LetterState";
 
-export function Keyboard({ onGuessWord }) {
-  const [currentGuess, setCurrentGuess] = useState("");
-
-  function onUpdateGuess(key) {
-    if (key === Constants.ENTER_KEY) {
-      if (currentGuess.length == Constants.MAX_WORD_LENGTH) {
-        onGuessWord(currentGuess);
-        setCurrentGuess("");
-      }
-    } else if (key === Constants.DELETE_KEY) {
-      if (currentGuess.length > 0) {
-        setCurrentGuess(currentGuess.slice(0, -1));
-      }
-    } else {
-      if (currentGuess.length < Constants.MAX_WORD_LENGTH) {
-        setCurrentGuess(currentGuess + key);
-      }
-    }
-  }
-
+export function Keyboard({ currentGuess, onInput }) {
   let firstRowKeys = Array(
     { value: "Q", style: KeyStyle.LETTER, state: LetterState.unknown },
     { value: "W", style: KeyStyle.LETTER, state: LetterState.unknown },
@@ -80,7 +60,7 @@ export function Keyboard({ onGuessWord }) {
               value={k.value}
               style={k.style}
               state={k.state}
-              onPress={onUpdateGuess}
+              onPress={onInput}
             />
           ))}
           <div className="row">
@@ -90,7 +70,7 @@ export function Keyboard({ onGuessWord }) {
                 value={k.value}
                 style={k.style}
                 state={k.state}
-                onPress={onUpdateGuess}
+                onPress={onInput}
               />
             ))}
           </div>
@@ -102,7 +82,7 @@ export function Keyboard({ onGuessWord }) {
               value={k.value}
               style={k.style}
               state={k.state}
-              onPress={onUpdateGuess}
+              onPress={onInput}
             />
           ))}
         </div>
