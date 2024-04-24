@@ -1,8 +1,8 @@
 import { LetterState } from "../components/LetterState";
-import { getState } from "../helpers/state";
+import { getGuessedState } from "../helpers/state";
 
 export function getCandidateWords(guessedWord, wordle, candidates) {
-  let state = getState(guessedWord, wordle);
+  let state = getGuessedState(guessedWord, wordle);
 
   const correctIndices = getIndices(state, LetterState.correct);
   const presentIndices = getIndices(state, LetterState.present);

@@ -10,7 +10,7 @@ import { RemainingWords } from "../components/RemainingWords";
 import { TileRowGrid } from "../components/TileRowGrid";
 import { WordleAnswer } from "../components/WordleAnswer";
 
-import { getState } from "../helpers/state";
+import { getGuessedState } from "../helpers/state";
 
 import * as Constants from "../constants/constants";
 
@@ -108,7 +108,7 @@ export default function Home() {
     let nextLetterStates = letterStates;
 
     words.forEach((word) => {
-      const state = getState(word, wordleAnswer);
+      const state = getGuessedState(word, wordleAnswer);
       state.forEach((s, i) => {
         const currentState = nextLetterStates.get(word[i]);
         if (currentState !== LetterState.correct) {

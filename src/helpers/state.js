@@ -2,18 +2,18 @@ import { LetterState } from "../components/LetterState";
 
 import * as Constants from "../constants/constants";
 
-//#SB: rename
-export function getDefaultState(currentGuess) {
-  let state = Array(currentGuess.length).fill(LetterState.unknown);
-  for (let i = currentGuess.length; i < Constants.MAX_WORD_LENGTH; ++i) {
-    state.push(LetterState.unset);
+export function getGuessingState(currentGuess) {
+  let state = getInitialState(LetterState.unset);
+
+  for (let i = 0; i < currentGuess.length; ++i) {
+    state[i] = LetterState.unknown;
   }
 
   return state;
 }
 
-export function getState(guessedWord, wordle) {
-  let state = Array(Constants.MAX_WORD_LENGTH).fill(LetterState.unknown);
+export function getGuessedState(guessedWord, wordle) {
+  let state = getInitialState(LetterState.unknown);
 
   if (guessedWord === Constants.EMPTY_WORD) {
     return state;
@@ -63,4 +63,8 @@ function getIndices(letter, word) {
   }
 
   return indices;
+}
+
+function getInitialState(initialState) {
+  return Array(Constants.MAX_WORD_LENGTH).fill(initialState);
 }
