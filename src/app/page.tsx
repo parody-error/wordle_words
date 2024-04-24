@@ -136,37 +136,39 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <div className="row">
-          <div className="column">
-            <TileRowGrid
-              currentGuess={currentGuess}
-              guessedWords={guessedWords}
-              wordle={wordleAnswer}
-            />
-          </div>
-          <div className="column">
-            <div>
-              <WordleAnswer onUpdateWordleAnswer={onUpdateWordleAnswer} />
-            </div>
-            <div className="remaining-words">
-              <RemainingWords
-                title="Possible Guesses"
+      <div className="center-screen">
+        <div className={styles.description}>
+          <div className="row">
+            <div className="column">
+              <TileRowGrid
+                currentGuess={currentGuess}
                 guessedWords={guessedWords}
                 wordle={wordleAnswer}
-                candidateWords={wordleGuesses}
-              />
-              <RemainingWords
-                title="Possible Answers"
-                guessedWords={guessedWords}
-                wordle={wordleAnswer}
-                candidateWords={wordleAnswers}
               />
             </div>
+            <div className="column">
+              <div>
+                <WordleAnswer onUpdateWordleAnswer={onUpdateWordleAnswer} />
+              </div>
+              <div className="remaining-words">
+                <RemainingWords
+                  title="Possible Guesses"
+                  guessedWords={guessedWords}
+                  wordle={wordleAnswer}
+                  candidateWords={wordleGuesses}
+                />
+                <RemainingWords
+                  title="Possible Answers"
+                  guessedWords={guessedWords}
+                  wordle={wordleAnswer}
+                  candidateWords={wordleAnswers}
+                />
+              </div>
+            </div>
+            <div className="row"></div>
+            <hr />
+            <Keyboard letterStates={letterStates} onInput={onKeyboardInput} />
           </div>
-          <div className="row"></div>
-          <hr />
-          <Keyboard letterStates={letterStates} onInput={onKeyboardInput} />
         </div>
       </div>
     </main>
