@@ -15,48 +15,30 @@ import { getState } from "../helpers/state";
 import * as Constants from "../constants/constants";
 
 export default function Home() {
-  const [wordleAnswer, setWordleAnswer] = useState(
-    Constants.DEFAULT_WORDLE_WORD
-  );
+  const [wordleAnswer, setWordleAnswer] = useState(Constants.DEFAULT_ANSWER);
   const [wordleAnswers, setWordleAnswers] = useState(new Set());
   const [wordleGuesses, setWordleGuesses] = useState(new Set());
   const [currentGuess, setCurrentGuess] = useState("");
   const [guessedWordCount, setGuessedWordCount] = useState(0);
-  const [guessedWords, setGuessedWords] = useState(
-    Array<string>(Constants.MAX_GUESS_COUNT).fill(Constants.EMPTY_WORD)
-  );
-  const [letterStates, setLetterStates] = useState(
-    new Map([
-      ["A", LetterState.unknown],
-      ["B", LetterState.unknown],
-      ["C", LetterState.unknown],
-      ["D", LetterState.unknown],
-      ["E", LetterState.unknown],
-      ["F", LetterState.unknown],
-      ["G", LetterState.unknown],
-      ["H", LetterState.unknown],
-      ["I", LetterState.unknown],
-      ["J", LetterState.unknown],
-      ["K", LetterState.unknown],
-      ["L", LetterState.unknown],
-      ["M", LetterState.unknown],
-      ["N", LetterState.unknown],
-      ["O", LetterState.unknown],
-      ["P", LetterState.unknown],
-      ["Q", LetterState.unknown],
-      ["R", LetterState.unknown],
-      ["S", LetterState.unknown],
-      ["T", LetterState.unknown],
-      ["U", LetterState.unknown],
-      ["V", LetterState.unknown],
-      ["W", LetterState.unknown],
-      ["X", LetterState.unknown],
-      ["Y", LetterState.unknown],
-      ["Z", LetterState.unknown],
-      [Constants.ENTER_KEY, LetterState.unknown],
-      [Constants.DELETE_KEY, LetterState.unknown],
-    ])
-  );
+  const [guessedWords, setGuessedWords] = useState(getInitialGuesses());
+  const [letterStates, setLetterStates] = useState(getInitialStates());
+
+  function getInitialGuesses() {
+    return Array<string>(Constants.MAX_GUESS_COUNT).fill(Constants.EMPTY_WORD);
+  }
+
+  function getInitialStates() {
+    let states = new Map();
+
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach((letter) => {
+      states.set(letter, LetterState.unknown);
+    });
+
+    states.set(Constants.ENTER_KEY, LetterState.unknown);
+    states.set(Constants.DELETE_KEY, LetterState.unknown);
+
+    return states;
+  }
 
   useEffect(() => {
     fetchWords(Constants.WORDLE_GUESSES)

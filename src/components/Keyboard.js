@@ -63,17 +63,17 @@ export function Keyboard({ letterStates, onInput }) {
               onPress={onInput}
             />
           ))}
-          <div className="row">
-            {secondRowKeys.map((k) => (
-              <KeyboardKey
-                key={k.value}
-                value={k.value}
-                style={k.style}
-                state={letterStates.get(k.value)}
-                onPress={onInput}
-              />
-            ))}
-          </div>
+        </div>
+        <div className="row">
+          {secondRowKeys.map((k) => (
+            <KeyboardKey
+              key={k.value}
+              value={k.value}
+              style={k.style}
+              state={letterStates.get(k.value)}
+              onPress={onInput}
+            />
+          ))}
         </div>
         <div className="row">
           {thirdRowKeys.map((k) => (
