@@ -18,14 +18,9 @@ export default function Home() {
   const [wordleAnswer, setWordleAnswer] = useState(Constants.DEFAULT_ANSWER);
   const [wordleAnswers, setWordleAnswers] = useState(new Set());
   const [wordleGuesses, setWordleGuesses] = useState(new Set());
-  const [currentGuess, setCurrentGuess] = useState("");
-  const [guessedWordCount, setGuessedWordCount] = useState(0);
-  const [guessedWords, setGuessedWords] = useState(getInitialGuesses());
+  const [currentGuess, setCurrentGuess] = useState(Constants.EMPTY_WORD);
+  const [guessedWords, setGuessedWords] = useState(Array<string>());
   const [letterStates, setLetterStates] = useState(getInitialStates());
-
-  function getInitialGuesses() {
-    return Array<string>(Constants.MAX_GUESS_COUNT).fill(Constants.EMPTY_WORD);
-  }
 
   function getInitialStates() {
     let states = new Map();
@@ -78,38 +73,34 @@ export default function Home() {
   }
 
   function onKeyboardInput(input: string) {
-    if (guessedWordCount === Constants.MAX_GUESS_COUNT) {
+    if (guessedWords.length === Constants.MAX_GUESS_COUNT) {
       return;
     }
 
     if (input === Constants.ENTER_KEY) {
-      if (isValidWord(currentGuess)) {
-        addGuess(currentGuess);
-      }
-    } else if (input === Constants.DELETE_KEY) {
-      if (currentGuess.length > 0) {
-        setCurrentGuess(currentGuess.slice(0, -1));
-      }
+      addCurrentGuess();
     } else {
-      if (currentGuess.length < Constants.MAX_WORD_LENGTH) {
-        setCurrentGuess(currentGuess + input);
+      if (input === Constants.DELETE_KEY) {
+        if (currentGuess.length > 0) {
+          setCurrentGuess(currentGuess.slice(0, -1));
+        }
+      } else {
+        if (currentGuess.length < Constants.MAX_WORD_LENGTH) {
+          setCurrentGuess(currentGuess + input);
+        }
       }
     }
   }
 
-  function addGuess(word: string) {
-    const nextGuessedWords = guessedWords.map((existingWord, i) => {
-      if (i === guessedWordCount) {
-        return word;
-      } else {
-        return existingWord;
-      }
-    });
+  function addCurrentGuess() {
+    if (!isValidWord(currentGuess)) {
+      return;
+    }
 
+    let nextGuessedWords = [...guessedWords, currentGuess];
+
+    setCurrentGuess(Constants.EMPTY_WORD);
     setGuessedWords(nextGuessedWords);
-    setGuessedWordCount(guessedWordCount + 1);
-    setCurrentGuess("");
-
     updateLetterStates(nextGuessedWords);
   }
 
@@ -148,7 +139,11 @@ export default function Home() {
       <div className={styles.description}>
         <div className="row">
           <div className="column">
-            <TileRowGrid guessedWords={guessedWords} wordle={wordleAnswer} />
+            <TileRowGrid
+              currentGuess={currentGuess}
+              guessedWords={guessedWords}
+              wordle={wordleAnswer}
+            />
           </div>
           <div className="column">
             <div>

@@ -3,4 +3,5 @@ export enum LetterState {
     correct = 'correct',
     present = 'present',
     unknown = 'unknown',
+    unset = 'unset',
 };

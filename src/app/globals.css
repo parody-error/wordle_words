@@ -149,6 +149,14 @@
 }
 
 .Tile-module_tile__UWEHN[data-state="unknown"] {
+  background-color: grey;
+
+  color: var(--key-evaluated-text-color-absent);
+
+  border: 1px solid darkgrey;
+}
+
+.Tile-module_tile__UWEHN[data-state="unset"] {
   background-color: var(--color-unknown);
 
   color: var(--key-evaluated-text-color-absent);

@@ -14,6 +14,7 @@ export function WordleAnswer({ onUpdateWordleAnswer }) {
 
   return (
     <input
+      name="WordleAnswer"
       value={wordleAnswer}
       placeholder="Wordle Word"
       onChange={(e) => onChange(e.target.value)}

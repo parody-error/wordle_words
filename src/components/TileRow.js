@@ -1,12 +1,15 @@
 import { Tile } from "./Tile";
-import { getState } from "../helpers/state";
+import { getDefaultState, getState } from "../helpers/state";
 
-export function TileRow({ guessedWord, wordle }) {
-  let state = getState(guessedWord, wordle);
+import * as Constants from "../constants/constants";
+
+export function TileRow({ word, isGuess, wordle }) {
+  let state = isGuess ? getState(word, wordle) : getDefaultState(word);
+  let tileLetters = word.padEnd(Constants.MAX_WORD_LENGTH, " ").split("");
 
   return (
     <div className="tile-row-container">
-      {guessedWord.split("").map((l, i) => (
+      {tileLetters.map((l, i) => (
         <Tile key={i} letter={l} state={state[i]} />
       ))}
     </div>

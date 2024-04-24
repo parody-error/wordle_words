@@ -1,7 +1,7 @@
 export const DEFAULT_ANSWER = "TITHE";
 export const MAX_GUESS_COUNT = 6;
 export const MAX_WORD_LENGTH = 5;
-export const EMPTY_WORD = "     ";
+export const EMPTY_WORD = "";
 export const MAX_WORDS_DISPLAYED = 15;
 export const ENTER_KEY = "ENTER";
 export const DELETE_KEY = "DEL";
