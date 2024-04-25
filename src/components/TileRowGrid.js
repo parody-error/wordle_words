@@ -1,4 +1,3 @@
-import { useId } from "react";
 import { TileRow } from "./TileRow";
 
 import * as Constants from "../constants/constants";
@@ -14,7 +13,7 @@ export function TileRowGrid({ currentGuess, guessedWords, wordle }) {
     <div>
       {guessedWords.map((w) => (
         <TileRow
-          key={useId()}
+          key="KeyboardRow1"
           word={w}
           isGuessing={false}
           wordle={wordle}
@@ -22,7 +21,7 @@ export function TileRowGrid({ currentGuess, guessedWords, wordle }) {
       ))}
       {showCurrentGuess && (
         <TileRow
-          key={useId()}
+          key="KeyboardRow2"
           word={currentGuess}
           isGuessing={true}
           wordle={wordle}
@@ -30,7 +29,7 @@ export function TileRowGrid({ currentGuess, guessedWords, wordle }) {
       )}
       {emptyWords.map((w) => (
         <TileRow
-          key={useId()}
+          key="KeyboardRow3"
           word={w}
           isGuessing={true}
           wordle={wordle}
