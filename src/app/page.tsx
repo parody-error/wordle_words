@@ -124,10 +124,16 @@ export default function Home() {
 
     words.forEach((word) => {
       const state = getGuessedState(word, wordleAnswer);
-      state.forEach((s, i) => {
-        const currentState = nextLetterStates.get(word[i]);
-        if (currentState !== LetterState.correct) {
-          nextLetterStates.set(word[i], s);
+
+      state.forEach((updatedState, index) => {
+        const currentState = nextLetterStates.get(word[index]);
+        if (currentState === LetterState.unknown) {
+          nextLetterStates.set(word[index], updatedState);
+        } else if (
+          currentState === LetterState.present &&
+          updatedState === LetterState.correct
+        ) {
+          nextLetterStates.set(word[index], updatedState);
         }
       });
     });
@@ -167,12 +173,14 @@ export default function Home() {
               </div>
               <div className="remaining-words">
                 <RemainingWords
+                  key="RemainingGuesses"
                   title="Possible Guesses"
                   guessedWords={guessedWords}
                   wordle={wordleAnswer}
                   candidateWords={wordleGuesses}
                 />
                 <RemainingWords
+                  key="RemainingAnswers"
                   title="Possible Answers"
                   guessedWords={guessedWords}
                   wordle={wordleAnswer}

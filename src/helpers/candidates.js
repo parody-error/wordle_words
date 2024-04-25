@@ -8,37 +8,38 @@ export function getCandidateWords(guessedWord, wordle, candidates) {
   const presentIndices = getIndices(state, LetterState.present);
   const absentIndices = getIndices(state, LetterState.absent);
 
-  let words = candidates.filter((candidateWord) => {
-    for (let i = 0; i < correctIndices.length; ++i) {
-      let index = correctIndices[i];
+  let words = [...candidates];
 
-      if (guessedWord[index] !== candidateWord[index]) {
-        return false;
-      }
-    }
-
-    return true;
+  correctIndices.forEach((i) => {
+    words = words.filter((candidateWord) => {
+      return guessedWord[i] === candidateWord[i];
+    });
   });
 
   presentIndices.forEach((i) => {
     let letter = guessedWord[i];
-    let letterCount = countPresent1(guessedWord, state, letter);
+    let count = countLetterInGuess(guessedWord, state, letter);
 
     words = words.filter((candidateWord) => {
-      return letterCount <= countPresent2(candidateWord, state, letter);
+      if (candidateWord[i] === letter) {
+        return false;
+      }
+
+      return count <= countLetterInCandidate(candidateWord, state, letter);
     });
   });
 
-  words = words.filter((candidateWord) => {
-    for (let i = 0; i < absentIndices.length; ++i) {
-      let letter = guessedWord[absentIndices[i]];
+  absentIndices.forEach((i) => {
+    let letter = guessedWord[i];
+    let count = countLetterInGuess(guessedWord, state, letter);
 
-      if (countAbsent(candidateWord, state, letter) > 0) {
+    words = words.filter((candidateWord) => {
+      if (candidateWord[i] === letter) {
         return false;
       }
-    }
 
-    return true;
+      return count >= countLetterInCandidate(candidateWord, state, letter);
+    });
   });
 
   return words;
@@ -53,11 +54,11 @@ function getIndices(state, letterState) {
   }, []);
 }
 
-function countPresent1(guessedWord, state, letter) {
+function countLetterInGuess(word, state, letter) {
   let count = 0;
 
-  for (let i = 0; i < guessedWord.length; ++i) {
-    if (state[i] === LetterState.present && guessedWord[i] === letter) {
+  for (let i = 0; i < word.length; ++i) {
+    if (state[i] === LetterState.present && word[i] === letter) {
       ++count;
     }
   }
@@ -65,27 +66,11 @@ function countPresent1(guessedWord, state, letter) {
   return count;
 }
 
-function countPresent2(guessedWord, state, letter) {
+function countLetterInCandidate(word, state, letter) {
   let count = 0;
 
-  for (let i = 0; i < guessedWord.length; ++i) {
-    if (state[i] !== LetterState.correct && guessedWord[i] === letter) {
-      ++count;
-    }
-  }
-
-  return count;
-}
-
-function countAbsent(guessedWord, state, letter) {
-  let count = 0;
-
-  for (let i = 0; i < guessedWord.length; ++i) {
-    if (
-      state[i] !== LetterState.correct &&
-      state[i] !== LetterState.present &&
-      guessedWord[i] === letter
-    ) {
+  for (let i = 0; i < word.length; ++i) {
+    if (state[i] !== LetterState.correct && word[i] === letter) {
       ++count;
     }
   }
