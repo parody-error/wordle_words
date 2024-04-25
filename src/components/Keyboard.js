@@ -34,7 +34,6 @@ export function Keyboard({ letterStates, onInput }) {
     {
       value: Constants.ENTER_KEY,
       style: KeyStyle.SPECIAL,
-      state: LetterState.unknown,
     },
     { value: "Z", style: KeyStyle.LETTER },
     { value: "X", style: KeyStyle.LETTER },
@@ -46,7 +45,6 @@ export function Keyboard({ letterStates, onInput }) {
     {
       value: Constants.DELETE_KEY,
       style: KeyStyle.SPECIAL,
-      state: LetterState.unknown,
     }
   );
 
